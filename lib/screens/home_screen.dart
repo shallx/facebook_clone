@@ -59,7 +59,13 @@ class _HomeScreenState extends State<HomeScreen> {
               sliver: SliverToBoxAdapter(
                 child: Rooms(onlineUsers: onlineUsers),
               ),
-            )
+            ),
+            SliverPadding(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              sliver: SliverToBoxAdapter(
+                child: Stories(currentUser: currentUser, stories: stories),
+              ),
+            ),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:facebook/models/user_model.dart';
+import 'package:facebook/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class CreatePostContainer extends StatelessWidget {
@@ -15,10 +16,7 @@ class CreatePostContainer extends StatelessWidget {
         children: [
           Row(
             children: [
-              CircleAvatar(
-                radius: 20.0,
-                backgroundColor: Colors.grey[200],
-              ),
+              ProfileAvatar(imageUrl: currentUser.imageUrl),
               SizedBox(
                 width: 8.0,
               ),
