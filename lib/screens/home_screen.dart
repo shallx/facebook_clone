@@ -1,5 +1,6 @@
 import 'package:facebook/config/palette.dart';
 import 'package:facebook/data/data.dart';
+import 'package:facebook/models/models.dart';
 import 'package:facebook/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -64,6 +65,15 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.symmetric(vertical: 5),
               sliver: SliverToBoxAdapter(
                 child: Stories(currentUser: currentUser, stories: stories),
+              ),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (_, i) {
+                  final Post post = posts[i];
+                  return PostContainer(post: post);
+                },
+                childCount: posts.length,
               ),
             ),
           ],

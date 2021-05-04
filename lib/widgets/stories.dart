@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facebook/config/palette.dart';
 import 'package:facebook/models/models.dart';
+import 'package:facebook/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
 
 class Stories extends StatelessWidget {
@@ -13,7 +14,7 @@ class Stories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 200,
-      color: Colors.purple,
+      color: Colors.white30,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 1 + stories.length,
@@ -51,6 +52,7 @@ class _StoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isViewed = story?.isViewed ?? false;
     return Stack(
       children: [
         ClipRRect(
@@ -70,6 +72,38 @@ class _StoryCard extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: Palette.storyGradient,
             borderRadius: BorderRadius.circular(12.0),
+          ),
+        ),
+        Positioned(
+          top: 8,
+          left: 8,
+          child: isAddStory
+              ? Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: Icon(Icons.add),
+                    onPressed: () {
+                      print("Add to story");
+                    },
+                  ),
+                )
+              : ProfileAvatar(
+                  imageUrl: story?.imageUrl ?? "", hasBorder: !isViewed),
+        ),
+        Positioned(
+          bottom: 8.0,
+          left: 8.0,
+          child: Text(
+            isAddStory ? 'Add to Story' : story?.user.name ?? "Anonymouse",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         )
       ],
